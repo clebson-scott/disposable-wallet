@@ -17,4 +17,4 @@ If you find a bug that could produce wrong statistics (which we consider a corre
 
 ## Supported version
 
-The `main` branch is the supported version. Published artifacts are frozen in `analysis/results/` and on Zenodo (DOI 10.5281/zenodo.23136779).
+The `main` branch is the supported version. Published artifacts are frozen in `analysis/results/` and on Zenodo (DOI 10.5281/zenodo.23136778).

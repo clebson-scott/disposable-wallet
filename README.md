@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://doi.org/10.5281/zenodo.23136779"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23136779-blue" alt="DOI"></a>
+  <a href="https://doi.org/10.5281/zenodo.23136778"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23136778-blue" alt="DOI"></a>
   <a href="https://github.com/clebson-scott/sistema-gestao-pecab/actions/workflows/ci.yml"><img src="https://github.com/clebson-scott/sistema-gestao-pecab/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/license-CC--BY%204.0-green" alt="License">
   <img src="https://img.shields.io/badge/python-3.9%2B-blue" alt="Python">
@@ -116,14 +116,14 @@ Defensive research. All addresses are public (blockchain) or come from vendor in
   year    = {2026},
   month   = {10},
   day     = {4},
-  doi     = {10.5281/zenodo.23136779},
-  url     = {https://zenodo.org/record/23136779},
+  doi     = {10.5281/zenodo.23136778},
+  url     = {https://zenodo.org/records/23136778},
   license = {CC-BY-4.0},
   note    = {ZEUS GUARD Security Lab (independent)}
 }
 ```
 
-Zenodo record: <https://zenodo.org/record/23136779>
+Zenodo record: <https://zenodo.org/records/23136778>
 
 ## Author
 

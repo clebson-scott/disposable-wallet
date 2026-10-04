@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "data"
+SEED = DATA / "seed"
+RESULTS = ROOT / "analysis" / "results"
+FIGURES = ROOT / "figures"
+PAPERS = ROOT / "paper"
+
 from fpdf import FPDF
 
 class P(FPDF):
@@ -53,9 +61,9 @@ corpo("The deposit includes: dataset.jsonl, dataset2.jsonl, dataset3.jsonl, data
 
 p.ln(3)
 p.set_font("helvetica","B",12); p.multi_cell(190,7,"FIGURE 1 - The on-chain accent of drainers"); p.ln(1)
-p.image("figura_sotaque_drainer.png", x=10, w=190)
+p.image(str(FIGURES / "figura_sotaque_drainer.png"), x=10, w=190)
 p.set_font("helvetica","",9); p.ln(2)
 p.multi_cell(190,5,"Behavioral distributions of malicious addresses (red), rich honest controls (blue) and matched common users (green). A: fraction of empty/no-transaction addresses. B-F: feature distributions over the last 50 transactions per wallet.")
 
-p.output("paper_drainer.pdf")
+p.output(str(PAPERS / "paper_drainer.pdf"))
 print("paper_drainer.pdf gerado")

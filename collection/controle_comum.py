@@ -2,6 +2,14 @@
 """Controle PAREADO: carteiras 'comuns' — usuários de transações simples de
 valor pequeno (ETH puro, 0.001-2 ETH) em blocos recentes da mainnet.
 Anti-viés: nada de carteiras top do Etherscan; são usuários do dia a dia."""
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "data"
+SEED = DATA / "seed"
+RESULTS = ROOT / "analysis" / "results"
+FIGURES = ROOT / "figures"
+PAPERS = ROOT / "paper"
+
 import json, urllib.request, time, math, threading
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
@@ -81,7 +89,7 @@ def coleta(addr, label):
               "sem_tx": False})
     return r
 
-out = open("dataset_comuns.jsonl", "w")
+out = open(DATA / "dataset_comuns.jsonl", "w")
 lock = threading.Lock(); n = [0]
 
 def job(a):

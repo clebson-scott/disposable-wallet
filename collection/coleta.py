@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Coleta de features on-chain: 400 scam (ScamSniffer) vs 400 honestos (mainnet aleatoria)"""
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "data"
+SEED = DATA / "seed"
+RESULTS = ROOT / "analysis" / "results"
+FIGURES = ROOT / "figures"
+PAPERS = ROOT / "paper"
+
 import json, urllib.request, time, random, threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -63,12 +71,12 @@ def coleta(addr, label):
     r["sem_tx"] = False
     return r
 
-scam = json.load(open("scam_addrs.json"))
-ctrl = json.load(open("control_candidates.json"))
+scam = json.load(open(SEED / "scam_addrs.json"))
+ctrl = json.load(open(SEED / "control_candidates.json"))
 random.Random(42).shuffle(scam); random.Random(43).shuffle(ctrl)
 alvos = [(a, "scam") for a in scam[:450]] + [(a, "honesto") for a in ctrl[:450]]
 
-out = open("dataset.jsonl", "w")
+out = open(DATA / "dataset.jsonl", "w")
 lock = threading.Lock(); feitos = [0]
 def job(a, l):
     r = coleta(a, l)
@@ -82,4 +90,4 @@ with ThreadPoolExecutor(max_workers=6) as ex:
     for a, l in alvos:
         ex.submit(job, a, l)
 out.close()
-print("FIM - dataset.jsonl:", sum(1 for _ in open("dataset.jsonl")), "registros")
+print("FIM - dataset.jsonl:", sum(1 for _ in open(DATA / "dataset.jsonl")), "registros")

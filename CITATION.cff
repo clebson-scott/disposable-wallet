@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this dataset, code, or findings, please cite it as below."
+title: "The Disposable Wallet: Behavioral Signatures of Cryptocurrency Drainer Addresses on Ethereum"
+type: dataset
+authors:
+  - family-names: "Araujo"
+    given-names: "Clebson Campos de"
+    affiliation: "ZEUS GUARD Security Lab (independent)"
+doi: "10.5281/zenodo.23136779"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.23136779"
+    description: "Version of record on Zenodo"
+repository-code: "https://github.com/clebson-scott/sistema-gestao-pecab"
+url: "https://zenodo.org/record/23136779"
+abstract: "An empirical, fully reproducible study of 1,464 + 264 Ethereum wallets showing that drainer addresses carry a measurable on-chain behavioral signature: disposability (48.5% empty vs 9.5%/2.2% of controls), an interaction 'accent' (more unique counterparties, near-dormant rhythm, larger maxima; permutation p < 0.001), and 70-74% separability by a logistic classifier on 8 behavioral features."
+keywords:
+  - ethereum
+  - security
+  - phishing
+  - drainer
+  - behavioral-analysis
+  - open-science
+  - reproducibility
+license: CC-BY-4.0
+commit: "published October 4, 2026"

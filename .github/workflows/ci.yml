@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  reproduce:
+    name: Regenerate every number
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Analysis (chi2, Mann-Whitney, 5-fold logistic CV)
+        run: python3 analysis/analise.py
+
+      - name: Reproduction gate (published means & CLES at 1e-9 + seeded permutations)
+        run: python3 analysis/permutacao.py
+
+      - name: Figure
+        run: python3 figures/figura.py
+
+      - name: Paper
+        run: python3 paper/paper_drainer.py
+
+      - name: Upload regenerated artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: regenerated-results
+          path: |
+            analysis/results/resultado_analise.json
+            analysis/results/permutacao_reproducao.json
+            analysis/results/permutacao_comum_reproducao.json
+            figures/figura_sotaque_drainer.png
+            paper/paper_drainer.pdf
+          retention-days: 30

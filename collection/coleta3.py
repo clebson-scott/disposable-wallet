@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 """Lote 3: fechar 400 scam + 400 honesto com a logica corrigida (transactions direto)."""
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "data"
+SEED = DATA / "seed"
+RESULTS = ROOT / "analysis" / "results"
+FIGURES = ROOT / "figures"
+PAPERS = ROOT / "paper"
+
 import json, urllib.request, time, math, threading
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
@@ -55,10 +63,10 @@ def coleta(addr, label):
               "sem_tx": False})
     return r
 
-scam = json.load(open("scam_addrs.json"))
-ctrl = json.load(open("control_candidates.json"))
+scam = json.load(open(SEED / "scam_addrs.json"))
+ctrl = json.load(open(SEED / "control_candidates.json"))
 ja = set()
-for arq in ["dataset.jsonl", "dataset2.jsonl", "dataset3.jsonl"]:
+for arq in [DATA / "dataset.jsonl", DATA / "dataset2.jsonl", DATA / "dataset3.jsonl"]:
     for l in open(arq):
         ja.add(json.loads(l)["addr"])
 
@@ -67,7 +75,7 @@ ctrl_faltam = [a for a in ctrl if a not in ja]
 alvos = [(a, "scam") for a in scam_faltam[:150]] + [(a, "honesto") for a in ctrl_faltam[:420]]
 print("alvos lote 3:", len(alvos), "| scam:", min(150, len(scam_faltam)), "| honesto:", min(420, len(ctrl_faltam)), flush=True)
 
-out = open("dataset3.jsonl", "a")
+out = open(DATA / "dataset3.jsonl", "a")
 lock = threading.Lock(); n = [0]
 
 def job(a, l):

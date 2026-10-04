@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
 """Analise estatistica do 'sotaque on-chain' de drainers vs honestos.
 Fusao dos lotes 1-3, dedupe, features, testes e classificador."""
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "data"
+SEED = DATA / "seed"
+RESULTS = ROOT / "analysis" / "results"
+FIGURES = ROOT / "figures"
+PAPERS = ROOT / "paper"
+
 import json, math
 import numpy as np
 
 regs = {}
-for arq in ["dataset.jsonl", "dataset2.jsonl", "dataset3.jsonl"]:
+for arq in [DATA / "dataset.jsonl", DATA / "dataset2.jsonl", DATA / "dataset3.jsonl"]:
     try:
         for l in open(arq):
             r = json.loads(l)
@@ -137,10 +145,33 @@ print("\n[5] RESUMO: features estatisticamente significativas (p<0.05):")
 for f, p, dirn in sig:
     print(f"  {f} ({dirn}, p={p:.1e})")
 
+# --- [6] Classificador vs CONTROLE COMUM (o teste mais duro) ---
+comuns = []
+for l in open(DATA / "dataset_comuns.jsonl"):
+    r = json.loads(l)
+    if not r.get("sem_tx") and all(f in r for f in FEATS):
+        comuns.append(r)
+Xc = np.array([[r[f] for f in FEATS] for r in comuns])
+X2 = np.vstack([Xs, Xc]); y2 = np.concatenate([np.ones(len(Xs)), np.zeros(len(Xc))])
+mu2 = X2.mean(0); sd2 = X2.std(0) + 1e-9
+Xn2 = (X2 - mu2) / sd2
+Xn2 = np.hstack([np.ones((len(Xn2), 1)), Xn2])
+rng2 = np.random.default_rng(42)
+idx = rng2.permutation(len(Xn2)); Xn2, y2 = Xn2[idx], y2[idx]
+folds2 = np.array_split(np.arange(len(y2)), k)
+accs2 = []
+for i in range(k):
+    te = folds2[i]; tr = np.concatenate([folds2[j] for j in range(k) if j != i])
+    w2 = logreg_fit(Xn2[tr], y2[tr])
+    pred = (1 / (1 + np.exp(-Xn2[te] @ w2)) >= 0.5).astype(int)
+    accs2.append((pred == y2[te]).mean())
+print(f"\n[6] CLASSIFICADOR vs CONTROLE COMUM (5-fold CV):")
+print(f"  acuracia media: {np.mean(accs2)*100:.1f}% (chance={max(y2.mean(),1-y2.mean())*100:.1f}%)")
+
 json.dump({
     "n_scam": len(scam), "n_honesto": len(hon),
     "vazia_scam_pct": p_scam, "vazia_hon_pct": p_hon, "chi2": chi2,
     "acuracia_cv": float(np.mean(accs)), "auc_cv": float(np.mean(aucs)),
     "significativas": [(f, float(p), d) for f, p, d in sig],
-}, open("resultado_analise.json", "w"), ensure_ascii=False, indent=1)
+}, open(RESULTS / "resultado_analise.json", "w"), ensure_ascii=False, indent=1)
 print("\nSalvo em resultado_analise.json")

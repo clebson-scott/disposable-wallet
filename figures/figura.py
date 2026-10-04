@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 """Figura publicavel: o sotaque on-chain dos drainers (3 grupos)."""
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "data"
+SEED = DATA / "seed"
+RESULTS = ROOT / "analysis" / "results"
+FIGURES = ROOT / "figures"
+PAPERS = ROOT / "paper"
+
 import json
 import numpy as np
 import matplotlib
@@ -13,7 +21,7 @@ plt.rcParams.update({
 })
 
 regs = {}
-for arq in ["dataset.jsonl", "dataset2.jsonl", "dataset3.jsonl", "dataset_comuns.jsonl"]:
+for arq in [DATA / "dataset.jsonl", DATA / "dataset2.jsonl", DATA / "dataset3.jsonl", DATA / "dataset_comuns.jsonl"]:
     try:
         for l in open(arq):
             r = json.loads(l)
@@ -74,5 +82,5 @@ for (f, titulo, xmax), (i, j) in zip(FEATS, pos):
 
 axes[1][2].legend(fontsize=6.5, frameon=False)
 fig.tight_layout(rect=[0, 0, 1, 0.96])
-fig.savefig("figura_sotaque_drainer.png", dpi=200)
+fig.savefig(FIGURES / "figura_sotaque_drainer.png", dpi=200)
 print("figura salva: figura_sotaque_drainer.png")

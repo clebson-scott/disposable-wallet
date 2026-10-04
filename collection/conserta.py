@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 """Refetch: para registros marcados sem_tx, busca transacoes direto (counters mentia)"""
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "data"
+SEED = DATA / "seed"
+RESULTS = ROOT / "analysis" / "results"
+FIGURES = ROOT / "figures"
+PAPERS = ROOT / "paper"
+
 import json, urllib.request, time, math, threading
 from concurrent.futures import ThreadPoolExecutor
 BS = "https://eth.blockscout.com/api/v2"
@@ -12,7 +20,7 @@ def get(url, tries=3):
             time.sleep(1+t)
     return None
 
-rows = [json.loads(l) for l in open("dataset.jsonl")]
+rows = [json.loads(l) for l in open(DATA / "dataset.jsonl")]
 pend = [r for r in rows if r.get("sem_tx")]
 lock = threading.Lock(); print("refetch:", len(pend), flush=True)
 
@@ -53,7 +61,7 @@ with ThreadPoolExecutor(max_workers=6) as ex:
         f.result()
         if (i+1) % 60 == 0: print("progresso refetch:", i+1, flush=True)
 
-with open("dataset.jsonl","w") as out:
+with open(DATA / "dataset.jsonl","w") as out:
     for r in rows: out.write(json.dumps(r)+"\n")
 from collections import Counter
 print("FIM. agora com tx:", Counter((r['label'], r.get('sem_tx', True)) for r in rows))

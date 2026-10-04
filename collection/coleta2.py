@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 """Lote 2: mais scam + mais controle, com logica corrigida (transactions direto)"""
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+DATA = ROOT / "data"
+SEED = DATA / "seed"
+RESULTS = ROOT / "analysis" / "results"
+FIGURES = ROOT / "figures"
+PAPERS = ROOT / "paper"
+
 import json, urllib.request, time, math, threading
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
@@ -54,13 +62,13 @@ def coleta(addr, label):
         "sem_tx": False})
     return r
 
-scam = json.load(open("scam_addrs.json"))
-ctrl = json.load(open("control_candidates.json"))
-ja = {json.loads(l)["addr"] for l in open("dataset.jsonl")}
+scam = json.load(open(SEED / "scam_addrs.json"))
+ctrl = json.load(open(SEED / "control_candidates.json"))
+ja = {json.loads(l)["addr"] for l in open(DATA / "dataset.jsonl")}
 alvos = [(a, "scam") for a in scam[450:1000] if a not in ja] + \
         [(a, "honesto") for a in ctrl if a not in ja]
 print("alvos novos:", len(alvos), flush=True)
-out = open("dataset2.jsonl", "w"); lock = threading.Lock(); n=[0]
+out = open(DATA / "dataset2.jsonl", "w"); lock = threading.Lock(); n=[0]
 def job(a, l):
     r = coleta(a, l)
     with lock:

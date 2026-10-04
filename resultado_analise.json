@@ -1,0 +1,51 @@
+{
+ "n_scam": 757,
+ "n_honesto": 707,
+ "vazia_scam_pct": 48.48084544253633,
+ "vazia_hon_pct": 9.476661951909476,
+ "chi2": 266.65626854660803,
+ "acuracia_cv": 0.7003219041115936,
+ "auc_cv": 0.7835726432651116,
+ "significativas": [
+  [
+   "log_mediana",
+   0.0,
+   "scam maior"
+  ],
+  [
+   "log_max",
+   0.0,
+   "scam maior"
+  ],
+  [
+   "frac_enviadas",
+   0.0,
+   "hon maior"
+  ],
+  [
+   "contrapartes_unicas",
+   0.0,
+   "scam maior"
+  ],
+  [
+   "frac_transferencia_pura",
+   0.0,
+   "scam maior"
+  ],
+  [
+   "frac_revert",
+   0.0,
+   "hon maior"
+  ],
+  [
+   "tx_por_hora",
+   0.0,
+   "hon maior"
+  ],
+  [
+   "balance_eth",
+   0.0,
+   "hon maior"
+  ]
+ ]
+}

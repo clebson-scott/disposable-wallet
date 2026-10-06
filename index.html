@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Disposable Wallet — Results</title>
+<style>
+  :root{
+    --bg:#0f1419; --panel:#1a2029; --panel2:#222b36; --ink:#e6edf3;
+    --muted:#9aa7b4; --accent:#58a6ff; --scam:#e0575a; --hon:#3a9bdc; --com:#3cb371;
+    --border:#2d3744; --good:#3cb371; --warn:#e0a838;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;padding:0}
+  header{padding:48px 24px 32px;text-align:center;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#131a22 0%,var(--bg) 100%)}
+  header h1{font-size:2.1rem;font-weight:700;letter-spacing:-.5px}
+  header .sub{color:var(--muted);margin-top:8px;font-size:1.05rem}
+  header .meta{color:var(--accent);margin-top:14px;font-size:.82rem;letter-spacing:.5px}
+  .wrap{max-width:1040px;margin:0 auto;padding:32px 20px 80px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-bottom:36px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px}
+  .card .n{font-size:2.4rem;font-weight:800;letter-spacing:-1px}
+  .card .n.s{color:var(--scam)} .card .n.h{color:var(--hon)} .card .n.c{color:var(--accent)}
+  .card .t{color:var(--muted);font-size:.82rem;text-transform:uppercase;letter-spacing:1px;margin-top:6px}
+  .card .d{margin-top:10px;font-size:.92rem;color:#c5d0db}
+  section{margin-bottom:40px}
+  h2{font-size:1.35rem;font-weight:700;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+  h2 .tag{float:right;font-size:.7rem;font-weight:600;color:var(--good);background:rgba(60,179,113,.12);padding:3px 10px;border-radius:20px;border:1px solid rgba(60,179,113,.3)}
+  p.lead{color:#c5d0db;margin-bottom:14px}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;background:var(--panel);border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border)}
+  th{background:var(--panel2);color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.6px}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  td.p{color:var(--good);font-weight:600}
+  .pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.74rem;font-weight:600}
+  .pill.s{background:rgba(224,87,90,.15);color:var(--scam)}
+  .pill.h{background:rgba(58,155,220,.15);color:var(--hon)}
+  .fig{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center}
+  .fig img{max-width:100%;height:auto;border-radius:8px}
+  .fig .cap{color:var(--muted);font-size:.82rem;margin-top:12px}
+  .links{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+  .links a{display:inline-flex;align-items:center;gap:8px;background:var(--panel2);color:var(--ink);text-decoration:none;padding:11px 18px;border-radius:10px;border:1px solid var(--border);font-size:.9rem;font-weight:500;transition:border-color .15s}
+  .links a:hover{border-color:var(--accent)}
+  .links a .ic{color:var(--accent)}
+  .repro{display:flex;align-items:center;gap:10px;background:rgba(60,179,113,.08);border:1px solid rgba(60,179,113,.3);border-radius:10px;padding:14px 18px;margin-bottom:24px}
+  .repro .dot{width:10px;height:10px;border-radius:50%;background:var(--good);flex-shrink:0;box-shadow:0 0 8px var(--good)}
+  .repro .txt{font-size:.9rem}
+  .repro .txt b{color:var(--good)}
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:30px 20px;border-top:1px solid var(--border)}
+  code{background:var(--panel2);padding:2px 6px;border-radius:4px;font-size:.85em;color:var(--accent)}
+</style>
+</head>
+<body>
+<header>
+  <h1>The Disposable Wallet</h1>
+  <div class="sub">Behavioral signatures of cryptocurrency drainer addresses on Ethereum</div>
+  <div class="meta">An empirical, fully reproducible study of 1,464 + 264 wallets · ZEUS GUARD Security Lab</div>
+</header>
+
+<div class="wrap">
+
+  <div class="repro">
+    <div class="dot"></div>
+    <div class="txt"><b>Reproduction verified.</b> Every number on this page was regenerated from the local datasets by <code>make all</code> — zero API calls, zero cost. Published means &amp; CLES reproduce to 1e-9 (15/15 PASS).</div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="n s">48.5%</div>
+      <div class="t">Disposable wallets</div>
+      <div class="d">of malicious addresses are empty or transaction-less, vs 9.5% of rich controls and 2.2% of common users (χ² = 266.7, p ≈ 6e-60).</div>
+    </div>
+    <div class="card">
+      <div class="n c">70.0%</div>
+      <div class="t">Classifier accuracy</div>
+      <div class="d">5-fold CV logistic regression on 8 behavioral features vs rich controls (chance 61.5%), AUC 0.784. 74.6% vs matched common controls.</div>
+    </div>
+    <div class="card">
+      <div class="n h">1,464</div>
+      <div class="t">Addresses studied</div>
+      <div class="d">757 confirmed drainers (ScamSniffer) + 707 rich honest controls + 264 matched common users. All data included in the repo.</div>
+    </div>
+  </div>
+
+  <section>
+    <h2>The on-chain accent <span class="tag">Figure 1</span></h2>
+    <div class="fig">
+      <img src="figures/figura_sotaque_drainer.png" alt="Figure 1 — on-chain accent of drainers">
+      <div class="cap">Six-panel figure regenerated by <code>figures/figura.py</code> — disposability, counterparties, pure-ETH transfers, max value, rhythm, and send/receive balance across drainers, rich and common controls.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>The accent vs rich honest controls <span class="tag">all p &lt; 0.001</span></h2>
+    <p class="lead">Among wallets with transaction history (389 scam / 622 honest). Every behavioral feature separates malicious from honest wallets.</p>
+    <table>
+      <thead><tr><th>Feature</th><th class="num">Mean scam</th><th class="num">Mean honest</th><th class="num">CLES</th><th class="num">Direction</th></tr></thead>
+      <tbody>
+        <tr><td>log_mediana</td><td class="num">−9.59</td><td class="num">−13.04</td><td class="num">0.622</td><td><span class="pill s">scam higher</span></td></tr>
+        <tr><td>log_max</td><td class="num">−1.61</td><td class="num">−5.24</td><td class="num">0.724</td><td><span class="pill s">scam higher</span></td></tr>
+        <tr><td>frac_enviadas</td><td class="num">0.641</td><td class="num">0.803</td><td class="num">0.317</td><td><span class="pill h">honest higher</span></td></tr>
+        <tr><td>contrapartes_unicas</td><td class="num">16.95</td><td class="num">10.26</td><td class="num">0.654</td><td><span class="pill s">scam higher</span></td></tr>
+        <tr><td>frac_transferencia_pura</td><td class="num">0.544</td><td class="num">0.381</td><td class="num">0.637</td><td><span class="pill s">scam higher</span></td></tr>
+        <tr><td>tx_por_hora</td><td class="num">1.10</td><td class="num">19.27</td><td class="num">0.313</td><td><span class="pill h">honest higher</span></td></tr>
+        <tr><td>balance_eth</td><td class="num">0.028</td><td class="num">426.13</td><td class="num">0.365</td><td><span class="pill h">honest higher</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Classifier performance</h2>
+    <table>
+      <thead><tr><th>Metric</th><th class="num">vs rich honest</th><th class="num">vs matched common</th></tr></thead>
+      <tbody>
+        <tr><td>Accuracy (5-fold CV)</td><td class="num">70.0%</td><td class="num">74.6%</td></tr>
+        <tr><td>Chance baseline</td><td class="num">61.5%</td><td class="num">59.6%</td></tr>
+        <tr><td>AUC</td><td class="num">0.784</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Artifacts &amp; sources</h2>
+    <div class="links">
+      <a href="paper/paper_drainer.pdf"><span class="ic">📄</span> Preprint PDF</a>
+      <a href="analysis/results/resultado_analise.json"><span class="ic">{ }</span> Analysis results (JSON)</a>
+      <a href="analysis/results/permutacao_reproducao.json"><span class="ic">{ }</span> Reproduction report</a>
+      <a href="figures/figura_sotaque_drainer.png"><span class="ic">🖼</span> Figure 1 (PNG)</a>
+      <a href="docs/FINDINGS.md"><span class="ic">📖</span> Findings</a>
+      <a href="docs/METHODOLOGY.md"><span class="ic">📖</span> Methodology</a>
+      <a href="docs/DATA_DICTIONARY.md"><span class="ic">📖</span> Data dictionary</a>
+      <a href="README.md"><span class="ic">📖</span> README</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  The Disposable Wallet · Clebson Campos de Araujo · ZEUS GUARD Security Lab · CC-BY 4.0<br>
+  DOI 10.5281/zenodo.23136778 · Regenerated live from <code>make all</code>
+</footer>
+</body>
+</html>
